@@ -17,6 +17,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const fs = require('fs');
 const app = express();
+app.disable('x-powered-by');
 const uid = require('uid-safe');
 const validator = require('validator');
 
