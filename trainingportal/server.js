@@ -59,10 +59,13 @@ app.use('/public',express.static(path.join(__dirname, 'public')));
 
 
 app.use('/static', (req, res, next) => {
-    var result = req.url.match(/challengeDefinitions.json/);
-    if (result) {
-      return res.status(403).end('403 Forbidden');
-    }
+    //var result = req.url.match(/challengeDefinitions.json/);
+    //if (result) {
+    //  return res.status(403).end('403 Forbidden');
+    //}
+   if (url.match(/challengeDefinitions.json/i)) { 
+      return res.status(403).render('jail.html'); 
+      }
   next();
 });
 
