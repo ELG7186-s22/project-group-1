@@ -176,12 +176,15 @@ let createUpdateUserInternal = (username, localUser, password) => {
 
 let createUpdateUser = function(req, res, username, localUser, password){
     
-    var isStrongPass = validator.matches(password,/.{16,}/)==true &&
-    validator.matches(password,/[a-z]/)==true;
+    //var isStrongPass = validator.matches(password,/.{16,}/)==true &&
+    //validator.matches(password,/[a-z]/)==true;
 
-    if(!isStrongPass){
-        return util.apiResponse(req, res, 400, "Select a password that is made up from three or more words (16 or more characters)");
-    }
+    //if(!isStrongPass){
+    //    return util.apiResponse(req, res, 400, "Select a password that is made up from three or more words (16 or more characters)");
+    //}
+    var isStrongPass = validator.matches(password,/.{16,}/)==true && validator.matches(password,/(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-])/)==true; 
+      if(!isStrongPass){ 
+         return util.apiResponse(req, res, 400, "Select a password that is made up from at least one uppercase, one lowercase, one digit and one special character (16 or more characters)");
 
     createUpdateUserInternal(username, localUser, password);
   
